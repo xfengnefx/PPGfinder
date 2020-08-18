@@ -5,8 +5,8 @@ from multiprocessing import Pool
 
 import numpy as np
 
-__VERSION__ = "v0.1.4"
-__LAST_UPDATE__ = "Jun 7, 2020"
+__VERSION__ = "v0.1.5"
+__LAST_UPDATE__ = "Jun 28, 2020"
 
 ####################
 #    file utils    #
@@ -216,11 +216,11 @@ def worker(bundle):
         cov_relative = np.array([c/l for c, l in zip(cov, [e-s for s, e in gencode[name_gene][-1]])])
         if is_storeBothCov:
             intervals_inverse = np.array(gencode_inverse[name_gene][-1])
-            covq = group_overlaps(queries, intervals_inverse)
-            covq_relative = np.array([c/l for c, l in zip(covq, [e-s for s, e in queries])])
+            covq = group_overlaps(intervals_inverse, queries)
+            covq_relative = np.array([c/l for c, l in zip(covq, [e-s for s, e in intervals_inverse])])
         if is_outputall: condition = True
         else: 
-            if is_storeBothCov: condition = np.sum(cov_relative>0.0)>=threshold_nb_exons and np.max(cov_relative)>0.7 and np.sum(covq_relative>0.2)<3
+            if is_storeBothCov: condition = np.sum(cov_relative>0.0)>=threshold_nb_exons and np.max(cov_relative)>0.7 and np.sum(covq_relative>0.5)<5  # intron restriction is loose
             else: condition = np.sum(cov_relative>0.0)>1 and np.max(cov_relative)>0.7
         if condition:
             #print(name_fragment, file=sys.stderr)
@@ -292,7 +292,7 @@ if __name__=="__main__":
     print('[log::main] Got references.', file=sys.stderr)
 
     if nb_cpu==1:
-        print('[log::main] singe thread', file=sys.stderr)
+        print('[log::main] single thread', file=sys.stderr)
         worker([filename_input, filename_input, None, 0])
     else:  # bad multip but ok
         print('[log::main] multi thread', file=sys.stderr)
