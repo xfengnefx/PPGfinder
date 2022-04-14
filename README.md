@@ -8,7 +8,7 @@ and Three Great Apes Revealed by Long-Read Assemblies".
 
 ### python dependency and external tools
 
-- python librarise: numpy
+- python: numpy
 
 - need minimap2 with paftools.js for alignment and variant calling.
 They are not called by the scripts.
@@ -38,7 +38,7 @@ Each sequence is expected to be named like 'id|type|symbol', e.g.'ENST0000037657
 Output:
 
 - 2 intermediate files: prefix.PPG.paf and prefix.PPG.intermediate_results.
-These two can be ignore.
+These two can be ignored.
 
 - 1 final result file: prefix.PPG.final_results.
 This contains the identified processed pseudogenes, equivalent to table S2 in the manuscript.
