@@ -1,5 +1,4 @@
-import gzip
-import binascii
+import gzip, sys, binascii
 
 
 def is_gz(filename):
@@ -33,5 +32,3 @@ def opener(filename):
         with open(filename) as file:
             for line in file:
                 yield line
-
-
