@@ -167,8 +167,7 @@ if __name__=="__main__":
                         help='require PPG candidate to cover at least INT exons')
     parser.add_argument('-o', type=str, default='PPGFparse', required=True,
                         help="prefix of intermediate and output files")
-    parser.add_argument('gencode', action="store", type=str, help='gene reference in BED format (e.g. from Gencode).\
-                        Will only load entries with "protein_coding". ')
+    parser.add_argument('gencode', action="store", type=str, help='gene reference in BED format (e.g. from Gencode).')
     parser.add_argument('ref', action="store", type=str, help='reference genome')
     parser.add_argument('aln', action="store", type=str, help='splice-aware alignment of long structural variants')
 
@@ -188,10 +187,10 @@ if __name__=="__main__":
     filename_input = args.aln
 
     print('[M] loading references...', file=sys.stderr)
-    gencode = load_refgene_BED(filename_gencode, with_structure=True, only_pc=True)
+    gencode = load_refgene_BED(filename_gencode, with_structure=True, only_pc=False)
     if is_storeBothCov: 
         # load intron structures
-        gencode_inverse = load_refgene_BED(filename_gencode, with_structure=True, only_pc=True, select_inverse=True)
+        gencode_inverse = load_refgene_BED(filename_gencode, with_structure=True, only_pc=False, select_inverse=True)
     hs38_chrlen = load_refasm_chrlength(filename_ref)
 
     if nb_cpu==1:
