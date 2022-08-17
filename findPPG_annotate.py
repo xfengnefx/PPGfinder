@@ -193,6 +193,7 @@ def worker(d):
             parentgene = genename_map[parentgene]
         parentgene_ID = entry[-6].split('|')[0]
 
+        coor_contig = str(contig_start)+'-'+str(contig_end)
         if TYPE=='INS':
             contig_start = contig_start
             contig_end = contig_end
@@ -330,7 +331,7 @@ def worker(d):
                     continue
             cleavage = the_retrocopy[16:20].lower() + the_retrocopy[20:24]
             cleavage = cleavage[::-1]
-            coor_contig = str(contig_start)+'-'+str(contig_end)
+            #coor_contig = str(contig_start)+'-'+str(contig_end)
             coor_ref = str(chrom_s)+'-'+str(chrom_e)
             holder = [SVname, SVsamplename, 
                       TYPE, contig_name, SVchrom, SVstrand,
